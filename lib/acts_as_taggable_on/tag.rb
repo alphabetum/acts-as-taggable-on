@@ -6,12 +6,12 @@ class Tag < ActiveRecord::Base
   
   # LIKE is used for cross-database case-insensitivity
   def self.find_or_create_with_like_by_name(name)
-    find(:first, :conditions => ["name LIKE ?", name]) || create(:name => name)
+    find(:first, :conditions => ["upper(name) LIKE ?", name.upcase]) || create(:name => name)
   end
   
   # LIKE is used for cross-database case-insensitivity
   def self.find_with_like_by_name(name)
-    find(:first, :conditions => ["name LIKE ?", name])
+    find(:first, :conditions => ["upper(name) LIKE ?", name.upcase])
   end
   
   def self.from_param(name)
