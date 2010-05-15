@@ -173,7 +173,7 @@ module ActsAsTaggableOn::Taggable
       # Returns all tags of a given context
       def all_tags_on(context)
         opts =  ["#{ActsAsTaggableOn::Tagging.table_name}.context = ?", context.to_s]
-        base_tags.where(opts).order("#{ActsAsTaggableOn::Tagging.table_name}.created_at").group("#{ActsAsTaggableOn::Tagging.table_name}.tag_id").all
+        base_tags.where(opts).order("#{ActsAsTaggableOn::Tagging.table_name}.created_at").group("#{ActsAsTaggableOn::Tag.table_name}.id, #{ActsAsTaggableOn::Tag.table_name}.name, #{ActsAsTaggableOn::Tagging.table_name}.created_at, #{ActsAsTaggableOn::Tagging.table_name}.tag_id").all
       end
 
       ##
